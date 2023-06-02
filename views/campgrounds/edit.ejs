@@ -1,0 +1,34 @@
+    <% layout("layouts/Boilerplate") %>
+
+    <div class="row">
+        <h1 class="text-center" >Edit</h1>
+        <div class="col-6 offset-3">
+            <form action="/campgrounds/<%= campground._id %>?_method=put" method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title </label>
+                    <input value="<%= campground.title%>" class="form-control" type="text" id="title" name="campground[title]">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location </label>
+                    <input value="<%= campground.location%>" class="form-control" type="text" id="location" name="campground[location]">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Image URL: </label>
+                    <input value="<%= campground.image%>" class="form-control" type="text" id="image" name="campground[image]">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input name="campground[price]" value="<%=campground.price %>" type="text" class="form-control" placeholder="price" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description: </label>
+                    <textarea  class="form-control" name="campground[description]" id="description" cols="30" rows="5"><%=campground.description %></textarea>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-warning">Update</button>
+                </div>
+            </form>
+            <a class="btn btn-primary" href="/campgrounds/<%=campground._id %>">Cancel</a>
+            <a class="btn btn-info" href="/campgrounds">All Campgrounds</a>
+        </div>
+    </div>
