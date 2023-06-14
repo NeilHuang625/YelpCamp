@@ -48,18 +48,26 @@ router.put("/:id", validateCampground, catchAsync( async (req, res,next)=>{
     // req.body = {campground: {title:{...} ,location: {...}   }   }
     const updateCamp = await Campground.findByIdAndUpdate(id, {...req.body.campground}); 
     await updateCamp.save();
+    req.flash("success", "Successfully updated !")
     res.redirect(`/campgrounds/${updateCamp._id}`);
 }));
 
 router.delete("/:id", catchAsync( async (req, res,next)=>{
     const {id} = req.params;
     await Campground.findByIdAndDelete(id);
+    req.flash("success"," Campground Deleted!")
     res.redirect("/campgrounds")
 }));
 
 router.get("/:id", catchAsync( async (req,res,next)=>{
     const {id} = req.params;
     const campground = await Campground.findById(id).populate("reviews");
+
+    if(!campground){
+        req.flash("error", "Can't find the page!");
+        res.redirect("/campgrounds");
+    }
+
     res.render("campgrounds/show", {campground});
 
 }));
