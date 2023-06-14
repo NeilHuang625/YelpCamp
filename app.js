@@ -9,7 +9,7 @@ const catchAsync = require("./utils/catchAsync");
 const session = require("express-session");
 const flash = require("connect-flash");
 
-
+const name = "Neil";
 
 const campgrounds = require("./routes/campgrounds")
 const reviews = require("./routes/reviews")
