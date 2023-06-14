@@ -1,6 +1,5 @@
 <% layout("layouts/Boilerplate") %>
 
-
 <div class="row">
     <div class="col-6 mt-3">
         <div class="card " >
@@ -45,6 +44,11 @@
                     <div class="card-body">
                         <p>Rating: <%= review.rating %></p>
                         <p>Review: <%= review.body %></p>    
+
+                        <form action="/campgrounds/<%= campground._id %>/review/<%= review._id %>?_method=delete" method="post">
+                            <button class="btn btn-sm btn-danger" >Delete</button>
+                        </form>
+
                     </div>
                 </div> 
             <% } %>
