@@ -18,7 +18,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp");
 
 const db = mongoose.connection;
 
-db.on('error', err => {
+db.on("error", err => {
     logError(err);
   });
 db.once("open", ()=>{
