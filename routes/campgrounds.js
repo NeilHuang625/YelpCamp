@@ -5,6 +5,7 @@ const ExpressError = require("../utils/ExpressError");
 const Campground = require('../models/campground');
 const methodOverride = require("method-override");
 const {campgroundSchema, reviewSchema} = require("../schema");
+const {isLoggedIn} = require("../middleware");
 
 const validateCampground = (req,res,next)=>{
     
@@ -23,7 +24,7 @@ router.get("/", catchAsync( async (req, res, next)=>{
     res.render("campgrounds/index", {campgrounds});
 }));
 
-router.get("/new", (req, res)=>{
+router.get("/new",isLoggedIn, (req, res)=>{
     res.render("campgrounds/new");
 });
 
