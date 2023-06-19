@@ -6,12 +6,13 @@ const Campground = require('../models/campground');
 const methodOverride = require("method-override");
 const catchAsync = require("../utils/catchAsync");
 const ExpressError = require("../utils/ExpressError");
-const {validateReview} = require("../middleware")
+const {validateReview, isLoggedIn, isReviewAuthor} = require("../middleware")
 
 
-router.post("/", validateReview, catchAsync( async (req, res, next)=>{
+router.post("/",isLoggedIn, validateReview, catchAsync( async (req, res, next)=>{
     const review = new Review(req.body.review);
     const campground =await Campground.findById(req.params.id);
+    review.author = req.user._id;
     campground.reviews.push(review);
     await campground.save();
     await review.save();
@@ -21,7 +22,7 @@ router.post("/", validateReview, catchAsync( async (req, res, next)=>{
 
 
 
-router.delete("/:review_id", async (req, res, next)=>{
+router.delete("/:review_id", isLoggedIn, isReviewAuthor ,async (req, res, next)=>{
     const {id, review_id} = req.params;
     await Campground.findByIdAndUpdate(id,{$pull:{reviews:review_id}})
     await Review.findByIdAndDelete(review_id);
