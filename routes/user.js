@@ -8,13 +8,13 @@ const {storeReturnTo} = require("../middleware")
 const Campground = require("../models/campground")
 const user = require("../controllers/user")
 
-router.get("/register", user.renderSignupForm);
+router.route("/register")
+        .get(user.renderSignupForm)
+        .post(catchAsync( user.signup));
 
-router.post("/register", catchAsync( user.signup));
-
-router.get("/login", user.renderSigninForm)
-
-router.post("/login",storeReturnTo, passport.authenticate("local", {failureFlash: true, failureRedirect: "/login" }) , user.signin)
+router.route("/login")
+        .get(user.renderSigninForm)
+        .post(storeReturnTo, passport.authenticate("local", {failureFlash: true, failureRedirect: "/login" }) , user.signin)
 
 router.get("/logout", user.signout)
 
