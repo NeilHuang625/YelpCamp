@@ -6,53 +6,16 @@ const flash = require("connect-flash")
 const passport = require("passport");
 const {storeReturnTo} = require("../middleware")
 const Campground = require("../models/campground")
+const user = require("../controllers/user")
 
+router.get("/register", user.renderSignupForm);
 
+router.post("/register", catchAsync( user.signup));
 
-router.get("/register", (req, res, next)=>{
-    res.render("user/register.ejs");
-})
+router.get("/login", user.renderSigninForm)
 
-router.post("/register", catchAsync( async (req, res, next)=>{
-    try{
-    const {username, email, password} = req.body;
-    const user =new User({username, email});
-    const registerUser = await User.register(user, password);
-    req.login(registerUser, err=>{
-        if(err){
-            next(err);
-        }
-        req.flash("success", "Successfully registered!")
-        res.redirect("/campgrounds")
-    })
-    
-    }catch(e){
-        req.flash("error",e.message)
-        res.redirect("/register")
-    }
-}))
+router.post("/login",storeReturnTo, passport.authenticate("local", {failureFlash: true, failureRedirect: "/login" }) , user.signin)
 
-router.get("/login", (req, res, next)=>{
-    res.render("user/login.ejs");
-})
-
-router.post("/login",storeReturnTo, passport.authenticate("local", {failureFlash: true, failureRedirect: "/login" }) , (req, res, next)=>{
-    const redirectUrl = res.locals.returnToUrl || "/campgrounds";
-    delete res.locals.returnToUrl;
-    req.flash("success","Logined successfully!" )
-    res.redirect(redirectUrl)
-})
-
-router.get("/logout", (req, res, next)=>{
-    req.logout(function(err){
-        if(err){
-            next(err);
-        }
-    req.flash("success", "GoodBye!")
-    res.redirect("/campgrounds")
-        
-    });
-    
-})
+router.get("/logout", user.signout)
 
 module.exports = router;
