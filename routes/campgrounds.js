@@ -6,11 +6,18 @@ const Campground = require('../models/campground');
 const methodOverride = require("method-override");
 const {campgroundSchema, reviewSchema} = require("../schema");
 const {isLoggedIn, isAuthor, validateCampground} = require("../middleware");
-const campground = require("../controllers/campground")
+const campground = require("../controllers/campground");
+const multer  = require('multer');
+const {storage} = require("../cloudinary/index.js");
+const upload = multer({storage })
+
 
 router.route("/")
         .get(catchAsync(campground.index))
-        .post(isLoggedIn, validateCampground, catchAsync(campground.createCampground))
+        // .post(isLoggedIn, validateCampground, catchAsync(campground.createCampground))
+        .post( upload.array("image") ,(req,res,next)=>{
+                console.log(req.body, req.files)
+        })
 
 router.get("/new",isLoggedIn, campground.renderNewForm);
 
