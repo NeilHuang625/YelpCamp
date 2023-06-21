@@ -19,3 +19,4 @@ mongo Database <br>
 mongoose mongoDB management tool <br>
 Error Handling Middlewares <br>
 Joi backend error handling node package <br>
+Uploading img by using Multer package and store them in Cloudinary <br>
