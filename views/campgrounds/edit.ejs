@@ -25,13 +25,20 @@
                         Looks good!
                     </div>
                 </div>
-                <mb-3>
-                    <% campground.images.forEach(function(img, i){ %>
-                        <img src="<%= img.url %>"  class="img-thumbnail" alt="">
-                        <input type="checkbox" id="image-<%=i %>" value="<%= img.filename %>" name="imageDelete[]"  >
-                        <label for="image-<%=i %>">Delete</label>
+                <label class="form-label">Delete Images: </label>
+                <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
+                    <% campground.images.forEach((image, i) => { %>
+                    <div class="col">
+                        <div class="card">
+                            <label for="image-<%= i %>"><img class="card-img" src="<%= image.thumbnail %>" alt="">
+                                <div class="card-img-overlay text-end pt-1 pe-2">
+                                    <input class="form-check-input" type="checkbox" name="imageDelete[]" value="<%= image.filename %>" id="image-<%= i %>">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
                     <% }) %>
-                </mb-3>
+                </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">$</span>
                     <input name="campground[price]" value="<%=campground.price %>" type="text" class="form-control" placeholder="price" aria-label="Username" aria-describedby="basic-addon1" required>

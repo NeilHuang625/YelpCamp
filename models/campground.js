@@ -34,4 +34,8 @@ CampgroundSchema.post("findOneAndDelete", async (doc)=>{
     }
 })
 
+CampgroundSchema.path('images').schema.virtual('thumbnail').get(function() {
+    return this.url.replace('/upload/', '/upload/w_300/');
+});
+
 module.exports = mongoose.model("Campground" , CampgroundSchema);
