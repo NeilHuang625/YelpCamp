@@ -35,13 +35,22 @@ async function getImg(){
 const seedDB = async ()=>{
     await Campground.deleteMany({});
     
-    for(let i =0; i <40; i++){
+    for(let i =0; i <35; i++){
         const price = Math.floor(Math.random()*20 )+10;
         const camp = new Campground({
             author:"648ee386f4404d5c732f666e",
             location:`${sample(cities).city}, ${sample(cities).state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
-            image: await getImg(),
+            images: [
+                    {
+                    url: 'https://res.cloudinary.com/dk2dphyqw/image/upload/v1687318375/YelpCamp/giimqxxiqzqynnt1j3kq.jpg',
+                    filename: 'YelpCamp/giimqxxiqzqynnt1j3kq'
+                    },
+                    {
+                    url: 'https://res.cloudinary.com/dk2dphyqw/image/upload/v1687318375/YelpCamp/wjvu2styta4uzoii8uct.webp',
+                    filename: 'YelpCamp/wjvu2styta4uzoii8uct'
+                    }
+                    ],
             description:"Lorem ipoluptatumfdsafdsafsafdsfdsa corrudadsafdspti numquam beatae reiciendis. Ducimus numquam atque quam accusantium perspiciatis reiciendis dolor! Nulla expedita possimus reiciendis voluptatum? Eligendi provident ut in illum possimus?",
             price:price
         })

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./review.js")
+const {cloudinary} = require("../cloudinary")
 
 const CampgroundSchema = new Schema({
     images:[
@@ -25,10 +26,11 @@ const CampgroundSchema = new Schema({
 
 CampgroundSchema.post("findOneAndDelete", async (doc)=>{
     if(doc.reviews.length){
-        console.log("have review!")
         await Review.deleteMany({_id: {$in : doc.reviews} })
-    }else{
-        console.log("No reviews! delete directly");
+    }
+    //delete cloudinary pics associated with this campground
+    for(let img of doc.images ){
+        cloudinary.uploader.destroy(img.filename);
     }
 })
 
