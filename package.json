@@ -9,6 +9,7 @@
   "author": "Neil",
   "license": "ISC",
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.15.2",
     "axios": "^1.4.0",
     "cloudinary": "^1.37.2",
     "connect-flash": "^0.1.1",
