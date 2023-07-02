@@ -14,9 +14,6 @@ db.once("open", ()=>{
     console.log("Database connected!");
 })
 
-const sample = a=>a[Math.floor(Math.random()*a.length)];
-
-
 async function getImg(){ 
     try{
     const res = await axios.get("https://api.unsplash.com/photos/random", {
@@ -35,15 +32,20 @@ async function getImg(){
 const seedDB = async ()=>{
     await Campground.deleteMany({});
     
-    for(let i =0; i <40; i++){
+    for(let i =0; i <300; i++){
         const price = Math.floor(Math.random()*20 )+10;
+        const sample = a=>a[Math.floor(Math.random()*a.length)];
+        const random1000 = Math.floor(Math.random()*1000);
         const camp = new Campground({
             author:"648ee386f4404d5c732f666e",
-            location:`${sample(cities).city}, ${sample(cities).state}`,
+            location:`${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             geometry:{
                 type:"Point",
-                coordinates:[ -79.872858, 43.25608 ]
+                coordinates:[ 
+                    cities[random1000].longitude,
+                    cities[random1000].latitude
+                 ]
             },
             images: [
                     {

@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 const Review = require("./review.js")
 const {cloudinary} = require("../cloudinary")
 
+const opts = { toJSON: { virtuals: true } };
+
 const CampgroundSchema = new Schema({
     images:[
         {
@@ -33,7 +35,14 @@ const CampgroundSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review"
     }]
-});
+}, opts);
+
+CampgroundSchema.virtual("properties.popUpMarkUp").get(function(){
+    return `
+        <strong><a href="/campgrounds/${this._id}" >${this.title}</a></strong>
+        <p>${this.description.substring(0,20)}...</p>
+    `
+})
 
 CampgroundSchema.post("findOneAndDelete", async (doc)=>{
     if(doc.reviews.length){
