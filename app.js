@@ -29,7 +29,7 @@ mongoose.connect(dbUrl);
 const db = mongoose.connection;
 
 db.on("error", err => {
-    logError(err);
+    console.log(err);
   });
 db.once("open", ()=>{
     console.log("Connected to the database! aha!");
