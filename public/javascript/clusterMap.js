@@ -3,8 +3,8 @@ const map = new mapboxgl.Map({
 container: 'cluster-map',
 // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
 style: 'mapbox://styles/mapbox/streets-v12',
-center: [174.766011,-36.848228],
-zoom: 3
+center: [174.740882,-41.265624],
+zoom: 4.5
 });
  
 map.on('load', () => {
@@ -52,7 +52,7 @@ paint: {
 20,
 25,
 30,
-30
+27
 ]
 }
 });

@@ -1,50 +1,38 @@
 const mongoose = require("mongoose");
-const cities = require("./cities");
+// const cities = require("./cities");
+const cities = require("./nz")
 const axios = require("axios");
 const {descriptors, places} = require("./seedHelpers");
 const Campground = require("../models/campground");
 
-mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp");
+const dbUrl = process.env.DB_URL ;
+// || "mongodb://127.0.0.1:27017/yelp-camp" 
+mongoose.connect("mongodb+srv://neiltang618:jt2Mz7NXw52iREjJ@yelpcamp.pa8vckl.mongodb.net/?retryWrites=true&w=majority");
 const db = mongoose.connection;
 
 db.on('error', err => {
-    logError(err);
+    console.log(err);
   });
 db.once("open", ()=>{
     console.log("Database connected!");
 })
 
-async function getImg(){ 
-    try{
-    const res = await axios.get("https://api.unsplash.com/photos/random", {
-        params: {
-          client_id: '64PajU-HObbdhVZyWoCijczgcyMYGGB9mwHlHjikKrw',
-          collections: 1114848
-        }
-      });
-    const url = res.data.urls.regular;
-    return url;
-    }catch(e){
-        console.log(e)
-    }
-};
-
 const seedDB = async ()=>{
     await Campground.deleteMany({});
     
-    for(let i =0; i <300; i++){
+    for(let i =0; i <150; i++){
         const price = Math.floor(Math.random()*20 )+10;
         const sample = a=>a[Math.floor(Math.random()*a.length)];
-        const random1000 = Math.floor(Math.random()*1000);
+        const random99 = Math.floor(Math.random()*99);
         const camp = new Campground({
             author:"648ee386f4404d5c732f666e",
-            location:`${cities[random1000].city}, ${cities[random1000].state}`,
+            location:`${cities[random99].city}, ${cities[random99].admin_name}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             geometry:{
                 type:"Point",
                 coordinates:[ 
-                    cities[random1000].longitude,
-                    cities[random1000].latitude
+                    cities[random99].lng,
+                    cities[random99].lat
                  ]
             },
             images: [
