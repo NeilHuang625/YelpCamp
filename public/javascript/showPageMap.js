@@ -15,3 +15,6 @@ const marker = new mapboxgl.Marker()
         .setHTML(`<h3>${campground.title}</h3><p>${campground.location}</p>`)
     )
     .addTo(map)
+
+
+map.addControl(new mapboxgl.NavigationControl());
