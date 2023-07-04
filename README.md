@@ -1,12 +1,10 @@
-# Udemy_YelpCamp
+# YelpCamp WebApp
 
-<a href="https://yelpcamp-f2wv.onrender.com/">CLICK HERE AND EXPLORE</a>
+https://yelpcamp-f2wv.onrender.com
 
-Model–view–controller (MVC) design pattern
+Model–view–controller (MVC) design pattern.
 
-finalProject after I completed Udemy online course "Web development 2023"
-
-Collections for campgrounds.
+Project after I completed Udemy online course.
 
 RESTful CRUD
 
