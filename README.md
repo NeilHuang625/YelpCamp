@@ -1,4 +1,4 @@
-# Udemy_YelpCamp (Completing...)
+# Udemy_YelpCamp
 
 Model–view–controller (MVC) design pattern
 
