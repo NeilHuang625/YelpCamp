@@ -2,21 +2,35 @@
 
 https://yelpcamp-f2wv.onrender.com
 
-Model–view–controller (MVC) design pattern.
+YelpCamp is a full-stack website project where users can create and review campgrounds.
+This project is being created created using JavaScript, Node.js, Express.js, MongoDB, and Bootstrap.
 
-Project after I completed Udemy online course.
+## Technologies Used:
 
-RESTful CRUD
+>HTML5 
 
-HTML <br>
-CSS <br>
-Javascript <br>
-Bootstrap <br>
-node.js <br>
-express.js Framework<br>
-ejs templates <br>
-mongo Database <br>
-mongoose mongoDB management tool <br>
-Error Handling Middlewares <br>
-Joi backend error handling node package <br>
-Uploading img by using Multer package and store them in Cloudinary <br>
+>CSS3
+
+>JavaScript
+
+>Bootstrap 
+
+>Node.js 
+
+>Express.js
+
+>Mongo Database
+
+>EJS - Embedded JavaScript templating
+
+>RESTful Routes
+
+>Model–view–controller (MVC) design pattern.
+
+## Functionalities
+
+>CRUD for campgrounds.
+
+>Users Authentication & Authorization.
+
+>Locating every campgrounds via MapBox.
