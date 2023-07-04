@@ -18,11 +18,15 @@ const User = require("./models/user")
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require("helmet");
 
+const MongoStore = require("connect-mongo");
+
+const dbUrl = "mongodb://127.0.0.1:27017/yelp-camp";
+
 const campgroundRoute = require("./routes/campgrounds")
 const reviewRoute = require("./routes/reviews")
 const userRoute = require("./routes/user")
-
-mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp");
+// mongodb://127.0.0.1:27017/yelp-camp
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
 
@@ -35,7 +39,20 @@ db.once("open", ()=>{
 
 app.engine("ejs", ejsMate);
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret'
+    }
+});
+
+store.on("error", function(e){
+    console.log("Mongo Store error",e)
+})
+
 const sessionConfig  = {
+    store,
     name:"session",
     secret: "thisshouldbeabettersecret",
     resave: false,
