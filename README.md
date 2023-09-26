@@ -1,6 +1,6 @@
 # YelpCamp WebApp
 
-https://yelp-bvx3.onrender.com/
+https://13.210.117.53/
 
 YelpCamp is a full-stack website project where users can create and review campgrounds.
 This project is being created created using JavaScript, Node.js, Express.js, MongoDB, and Bootstrap.
