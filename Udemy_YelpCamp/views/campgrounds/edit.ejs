@@ -1,0 +1,63 @@
+    <% layout("layouts/boilerplate") %>
+
+    <div class="row">
+        <h1 class="text-center" >Edit</h1>
+        <div class="col-md-6 offset-md-3">
+            <form action="/campgrounds/<%= campground._id %>?_method=put" method="post" novalidate class="validated-form" enctype="multipart/form-data" >
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title </label>
+                    <input value="<%= campground.title%>" class="form-control" type="text" id="title" name="campground[title]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location </label>
+                    <input value="<%= campground.location%>" class="form-control" type="text" id="location" name="campground[location]" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Add more images</label>
+                    <input class="form-control" type="file" id="image" name="image" multiple>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <label class="form-label">Delete Images: </label>
+                <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
+                    <% campground.images.forEach((image, i) => { %>
+                    <div class="col">
+                        <div class="card">
+                            <label for="image-<%= i %>"><img class="card-img" src="<%= image.thumbnail %>" alt="">
+                                <div class="card-img-overlay text-end pt-1 pe-2">
+                                    <input class="form-check-input" type="checkbox" name="imageDelete[]" value="<%= image.filename %>" id="image-<%= i %>">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input name="campground[price]" value="<%=campground.price %>" type="text" class="form-control" placeholder="price" aria-label="Username" aria-describedby="basic-addon1" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description: </label>
+                    <textarea  class="form-control" name="campground[description]" id="description" cols="30" rows="5" required><%=campground.description %></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-warning">Update</button>
+                </div>
+            </form>
+            <a class="btn btn-primary" href="/campgrounds/<%=campground._id %>">Cancel</a>
+            <a class="btn btn-info" href="/campgrounds">All Campgrounds</a>
+        </div>
+    </div>
